@@ -1,7 +1,9 @@
 #! /apps/x86_64/nextflow/21.04.3 nextflow
 
+//params.querydir = "$PWD/test_genomes/*.fasta"
+
 // Change the filepath in Channel.fromPath() to read fasta files with a single sequence each
-  myFileChannel = Channel.fromPath('ERR690519_Influenza_split_files/*.fasta')
+  myFileChannel = Channel.fromPath(params.querydir)
 
 if (params.help) {
     helpMessage()
