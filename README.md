@@ -2,7 +2,7 @@
 The typical command for running the pipeline:<br>
 ```nextflow run blastnCOVIDextract.nf --querydir 'queryDirectory/*.fasta' --outdir 'outputDirectory'```<br><br>
 The command for running the pipeline with custom query, blastDB directory, and blastDB name.<br>
-```nextflow run blastnCOVIDextract.nf --query queryDirectory --dbDir blastDatabaseDirectory --dbName blastPrefixName```<br><br>
+```nextflow run blastnCOVIDextract.nf --querydir queryDirectory --dbDir blastDatabaseDirectory --dbName blastPrefixName```<br><br>
 Alternatively, in nextflow.config, edit the input folder name for ***querydir =*** on line 2 and edit the output folder name for ***outdir =*** on line 6.<br><br>
 ***Prerequisites***<br>
 - Python 3.9.X or higher<br>
