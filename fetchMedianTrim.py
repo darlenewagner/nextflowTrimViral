@@ -1,6 +1,6 @@
 #! /apps/x86_64/python/3.9.1/bin/python
 
-import sys, csv, statistics
+import sys, csv, statistics, os
 from itertools import islice
 
 
@@ -8,7 +8,16 @@ head = []
 
 ## First input file is a blastn output -outfmt 6
 with open(sys.argv[1], mode='r') as myBlast:
-    head = list(islice(myBlast, 10))
+    preLine = myBlast.readline()
+    myBlast.seek(0)
+    if(preLine.strip()):
+        ##print("Howdy")
+        head = list(islice(myBlast, 10))
+    elif(preLine.isspace()):
+        sys.exit()
+    else:
+        print("Howdy")
+        sys.exit()
 
 fivePrim = []
 threePrim = []
