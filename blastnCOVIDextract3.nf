@@ -4,7 +4,7 @@
 
 // Change the filepath in Channel.fromPath() to read fasta files with a single sequence each
  myFileChannel = Channel.fromPath(params.querydir)
-
+ myString = params.id
 
 //  datasets = Channel
 //                .fromPath(params.querydir)
@@ -17,7 +17,7 @@ if (params.help) {
 
 process runBlast {
 
-  publishDir "/scicomp/home-pure/ydn3/nextflowTrimViral/blastnIO/", mode: 'copy'
+  publishDir "/scicomp/home-pure/ydn3/nextflowTrimViral/blastnIO/$params.id", mode: 'copy'
   
   input:
   file fasta_file from myFileChannel
@@ -36,7 +36,7 @@ process runBlast {
 
 process showOutput {
 
-        publishDir "/scicomp/home-pure/ydn3/nextflowTrimViral/tentativeOutput/", mode: 'copy'
+        publishDir "/scicomp/home-pure/ydn3/nextflowTrimViral/tentativeOutput/$params.id", mode: 'copy'
 
         input:
 	
