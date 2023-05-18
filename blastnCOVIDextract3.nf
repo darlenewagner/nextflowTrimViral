@@ -1,14 +1,10 @@
 #! /apps/x86_64/nextflow/21.04.3 nextflow
 
-//params.querydir = "$PWD/test_genomes/*.fasta"
-
-// Change the filepath in Channel.fromPath() to read fasta files with a single sequence each
- myFileChannel = Channel.fromPath(params.querydir)
+// How to run:
+// for f in $IDS; do nextflow run nextflowTrimViral/blastnCOVIDextract3.nf --id "$f" --querydir "Genomes/sequences/"$f"_fasta_assembly/contigs/*.fasta"; done
+//
+ myFileChannel = Channel.fromPath(params.querydir, glob: true)
  myString = params.id
-
-//  datasets = Channel
-//                .fromPath(params.querydir)
-//                .map { file -> tuple(file.baseName, file) }
 
 if (params.help) {
     helpMessage()
@@ -17,7 +13,7 @@ if (params.help) {
 
 process runBlast {
 
-  publishDir "/scicomp/home-pure/ydn3/nextflowTrimViral/blastnIO/$params.id", mode: 'copy'
+  publishDir "/scicomp/home-pure/ydn3/nextflowTrimViral/blastnIO/$myString", mode: 'copy'
   
   input:
   file fasta_file from myFileChannel
@@ -36,7 +32,7 @@ process runBlast {
 
 process showOutput {
 
-        publishDir "/scicomp/home-pure/ydn3/nextflowTrimViral/tentativeOutput/$params.id", mode: 'copy'
+        publishDir "/scicomp/home-pure/ydn3/nextflowTrimViral/tentativeOutput/$myString", mode: 'copy'
 
         input:
 	
